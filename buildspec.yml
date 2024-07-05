@@ -22,6 +22,6 @@ phases:
 
 artifacts:
   files: '**/*'
-  name: basic-node-project
+  name: Demo-Repo
   discard-paths: yes
   base-directory: .
