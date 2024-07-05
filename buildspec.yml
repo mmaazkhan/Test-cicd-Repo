@@ -3,29 +3,28 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 14  # Change this if you're using a different runtime
     commands:
-      - echo Installing source NPM dependencies...
-      - npm install
+      - echo "No dependencies to install."
+
   pre_build:
     commands:
-      - echo Running linting...
+      - echo "Pre-build phase: Nothing to do here."
+
   build:
     commands:
-      - echo Running build script...
-      - npm run build
-      - echo Running tests...
-      - npm test
+      - echo "Build phase: Nothing to build for a static HTML page."
+
   post_build:
     commands:
-      - echo Build completed successfully.
+      - echo "Post-build phase: Copying files to the deployment directory."
+      - mkdir -p /var/www/html/demo
+      - cp -r * /var/www/html/demo/
 
 artifacts:
   files:
     - '**/*'
-  base-directory: build
-  discard-paths: yes
+  base-directory: .  # Change to your source directory if different
 
 cache:
-  paths:
-    - 'node_modules/**/*'
+  paths: []
