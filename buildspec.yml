@@ -3,25 +3,25 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 14  # Only include if Node.js is necessary for your process
+      nodejs: 18
+
     commands:
-      - echo "No dependencies to install."
+      - aws --version
+
   pre_build:
     commands:
-      - echo "Pre-build phase: Nothing to do here."
+      - echo pre Building application
+
   build:
     commands:
-      - echo "Build phase: Nothing to build for a static HTML page."
+      - echo Building application
+
   post_build:
     commands:
-      - echo "Post-build phase: Copying files to the deployment directory."
-      - mkdir -p /var/www/html/demo
-      - cp -r * /var/www/html/demo/
+      - echo Deploying Project
 
 artifacts:
-  files:
-    - '**/*'
-  base-directory: .  # Change to your source directory if different
-
-cache:
-  paths: []
+  files: '**/*'
+  name: basic-node-project
+  discard-paths: yes
+  base-directory: .
