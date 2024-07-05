@@ -1,4 +1,7 @@
 #!/bin/bash
 
-echo 'run application_start.sh: ' 
-echo 'pm2 restart nodejs-express-app' 
+# Navigate to the deployment directory
+cd /home/ubuntu/nodejs-aws-codedeploy-pipeline
+
+# Start your Node.js application
+npm start
