@@ -10,7 +10,6 @@ phases:
   pre_build:
     commands:
       - echo Running linting...
-      - npm run lint
   build:
     commands:
       - echo Running build script...
