@@ -6,8 +6,6 @@ mkdir -p /var/www/html
 # Navigate to the deployment directory
 cd /var/www/html
 
-# Install npm dependencies if needed (assuming a Node.js project)
-npm install
-
-# Build the project (assuming a build script in package.json)
-npm run build
+# Fix permissions for the new files
+chown -R www-data:www-data /var/www/html
+chmod -R 755 /var/www/html
