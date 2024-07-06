@@ -3,25 +3,28 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
-
+      nodejs: 14
     commands:
-      - aws --version
-
+      - echo Installing source NPM dependencies...
+      - npm install
   pre_build:
     commands:
-      - echo pre Building application
-
+      - echo Running linting...
+      - npm run lint
   build:
     commands:
-      - echo Building application
-
+      - echo Running build script...
+      - npm run build
   post_build:
     commands:
-      - echo Deploying Project
+      - echo Build completed successfully.
 
 artifacts:
-  files: '**/*'
-  name: Demo-Repo
+  files:
+    - '**/*'
+  base-directory: build
   discard-paths: yes
-  base-directory: .
+
+cache:
+  paths:
+    - 'node_modules/**/*'
