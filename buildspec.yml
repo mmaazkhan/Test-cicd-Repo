@@ -1,5 +1,5 @@
+---
 version: 0.2
-
 phases:
   install:
     runtime-versions:
@@ -7,29 +7,26 @@ phases:
     commands:
       - apt-get update
       - apt-get install -y git
-  pre_build:
-    commands:
-      - echo Pre-build phase...
-      # Add any necessary pre-build commands here
-   build:
-    commands:
-      - echo Build started on `date`
-      - echo Cloning the repository...
-      - git clone https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Demo-Repo
-      - cd https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Demo-Repo
-      - echo Pushing to GitHub...
-      - git remote add github https://github.com/mmaazkhan/Test-cicd-Repo.git
-      - git push github main
-  post_build:
-    commands:
-      - echo Post-build phase...
-      - echo Build completed successfully.
-
+pre_build:
+  commands:
+    - echo Pre-build phase...
+build:
+  commands:
+    - echo Build started on `date`
+    - echo Cloning the repository...
+    - git clone https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Demo-Repo
+    - cd https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Demo-Repo
+    - echo Pushing to GitHub...
+    - git remote add github https://github.com/mmaazkhan/Test-cicd-Repo.git
+    - git push github main
+post_build:
+  commands:
+    - echo Post-build phase...
+    - echo Build completed successfully.
 artifacts:
   files:
-    - '**/*'
+    - "**/*"
   base-directory: .
   discard-paths: no
-
 cache:
   paths: []
