@@ -1,42 +1,28 @@
 version: 0.2
 
-env:
-  variables:
-    CODECOMMIT_BRANCH: "master"
-    GITHUB_BRANCH: "main"
-    GITHUB_REPO: "https://github.com/yourusername/your-repo.git"
-
 phases:
   install:
-    runtime-versions:
-      python: 3.9
     commands:
-      - apt-get update
-      - apt-get install -y git
-
+      - echo Installing dependencies...
+      # Add any necessary installation commands here
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - aws --version
-
+      - echo Pre-build phase...
+      # Add any necessary pre-build commands here
   build:
     commands:
-      - echo Cloning CodeCommit repository...
-      - git clone https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Demo-Repo
-      - cd repo
-      - git checkout master
-      - echo Adding GitHub remote...
-      - git remote add github Test-cicd-Repo
-      - echo Pushing to GitHub...
-      - git push github master:main
-post_build:
-  commands:
-    - echo Post-build phase...
-    - echo Build completed successfully.
+      - echo Build phase...
+      # Add any build commands here if needed
+  post_build:
+    commands:
+      - echo Post-build phase...
+      - echo Build completed successfully.
+
 artifacts:
   files:
-    - "**/*"
+    - '**/*'
   base-directory: .
   discard-paths: no
+
 cache:
   paths: []
