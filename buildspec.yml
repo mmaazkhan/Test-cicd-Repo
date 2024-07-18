@@ -1,24 +1,34 @@
----
 version: 0.2
+
+env:
+  variables:
+    CODECOMMIT_BRANCH: "master"
+    GITHUB_BRANCH: "main"
+    GITHUB_REPO: "https://github.com/yourusername/your-repo.git"
+
 phases:
   install:
     runtime-versions:
-      python: 3.8
+      python: 3.9
     commands:
       - apt-get update
       - apt-get install -y git
-pre_build:
-  commands:
-    - echo Pre-build phase...
-build:
-  commands:
-    - echo Build started on `date`
-    - echo Cloning the repository...
-    - git clone https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Demo-Repo
-    - cd https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Demo-Repo
-    - echo Pushing to GitHub...
-    - git remote add github https://github.com/mmaazkhan/Test-cicd-Repo.git
-    - git push github main
+
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+
+  build:
+    commands:
+      - echo Cloning CodeCommit repository...
+      - git clone https://git-codecommit.us-west-2.amazonaws.com/v1/repos/Demo-Repo
+      - cd repo
+      - git checkout master
+      - echo Adding GitHub remote...
+      - git remote add github Test-cicd-Repo
+      - echo Pushing to GitHub...
+      - git push github master:main
 post_build:
   commands:
     - echo Post-build phase...
