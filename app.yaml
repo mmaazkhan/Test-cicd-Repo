@@ -1,7 +1,10 @@
-runtime: python38
-
-entrypoint: gunicorn -b :$PORT main:app
+runtime: python38  # Or use a static runtime if available
 
 handlers:
-- url: /.*
-  script: auto
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /(.*)
+  static_files: \1
+  upload: (.*)
