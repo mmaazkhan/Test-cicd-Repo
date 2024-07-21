@@ -1,8 +1,7 @@
-runtime: python39
+runtime: python38
+
 entrypoint: gunicorn -b :$PORT main:app
 
 handlers:
-- url: /
-  static_files:
-    path: index.html
-    upload: index.html
+- url: /.*
+  script: auto
