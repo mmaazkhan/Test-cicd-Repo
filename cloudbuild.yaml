@@ -2,30 +2,6 @@ steps:
 - name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', 'index.html', 'gs://demo-cicd-bucket/Repo/index.html']
 
-- name: 'ubuntu'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    # Create the .ssh directory
-    mkdir -p ~/.ssh
-    # Copy the private key from Secret Manager
-    echo $SSH_PRIVATE_KEY | base64 --decode > ~/.ssh/id_rsa
-    chmod 400 ~/.ssh/id_rsa
-    # SSH into the instance
-    gcloud compute ssh INSTANCE_NAME --zone=us-central1-c --command='echo "Hello, World!"'
-  secretEnv: ['SSH_PRIVATE_KEY']
-
-secrets:
-- kmsKeyName: projects/YOUR_PROJECT_ID/locations/global/keyRings/YOUR_KEYRING/cryptoKeys/YOUR_KEY
-  secretEnv:
-    SSH_PRIVATE_KEY: projects/YOUR_PROJECT_ID/secrets/SSH_PRIVATE_KEY/versions/latest
-
-secrets:
-- kmsKeyName: projects/YOUR_PROJECT_ID/locations/global/keyRings/YOUR_KEYRING/cryptoKeys/YOUR_KEY
-  secretEnv:
-    SSH_PRIVATE_KEY: projects/YOUR_PROJECT_ID/secrets/YOUR_SECRET_NAME/versions/latest
-
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: ['deploy.sh']
