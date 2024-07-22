@@ -2,19 +2,5 @@ steps:
 - name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', 'index.html', 'gs://demo-cicd-bucket/Repo/index.html']
 
-- name: 'gcr.io/cloud-builders/git'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    # Clone the repository
-    git clone https://github.com/mmaazkhan/Test-cicd-Repo.git /workspace/Test-cicd-Repo
-
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - 'app'
-  - 'deploy'
-  - '--quiet'
-
 options:
   logging: CLOUD_LOGGING_ONLY
