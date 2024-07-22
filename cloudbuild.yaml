@@ -1,6 +1,18 @@
+# steps:
+# - name: 'gcr.io/cloud-builders/gsutil'
+#   args: ['cp', 'index.html', 'gs://demo-cicd-bucket/Repo/index.html']
+
+# options:
+#   logging: CLOUD_LOGGING_ONLY
+
+
 steps:
-- name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'index.html', 'gs://demo-cicd-bucket/Repo/index.html']
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'https://github.com/mmaazkhan/demo-cicd-bucket.git']
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: ['./deploy.sh']
 
 options:
   logging: CLOUD_LOGGING_ONLY
